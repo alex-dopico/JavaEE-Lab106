@@ -44,7 +44,7 @@ public class InternRepo {
 
 	public Intern getInternByID(UUID id) {
 		for (Intern intern : getInterns()) {
-			if (intern.getId() == id) {
+			if (intern.getId().equals(id)) {
 				return intern;
 			}
 		}

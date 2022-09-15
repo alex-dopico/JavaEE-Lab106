@@ -25,18 +25,6 @@ public class CommandLine implements ICommandLine {
 	public EmployeeRepo getEmployeeRepo() { return this.employees; }
 	public InternRepo getInternRepo() { return this.interns; }
 
-	@Override
-	public void getEmployeeById (UUID id) {
-		Employee emp = getEmployeeRepo().getEmployeeByID(id);
-		System.out.println(emp.toString());
-	}
-
-	@Override
-	public void getInternById (UUID id) {
-		Intern intern = getInternRepo().getInternByID(id);
-		System.out.println(intern.toString());
-	}
-
 	/**
 	 * Adds 5 employees and 5 interns to
 	 * employee and intern repos
@@ -67,7 +55,29 @@ public class CommandLine implements ICommandLine {
 		getInternRepo().addIntern(intern5);
 	}
 
+	/**
+	 * finds an employee and prints its info
+	 * @param id
+	 * @return void
+	 */
+	@Override
+	@ShellMethod(value="finds an employee by its id", key="find-emp")
+	public void getEmployeeById (UUID id) {
+		Employee emp = getEmployeeRepo().getEmployeeByID(id);
+		System.out.println(emp.toString());
+	}
 
+	/**
+	 * finds an intern and prints its info
+	 * @param id
+	 * @return void
+	 */
+	@Override
+	@ShellMethod(value="find an intern by its id", key="find-intern")
+	public void getInternById (UUID id) {
+		Intern intern = getInternRepo().getInternByID(id);
+		System.out.println(intern.toString());
+	}
 
 	/**
 	 * create a new employee via user input

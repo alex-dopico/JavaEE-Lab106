@@ -38,7 +38,7 @@ public class EmployeeRepo {
 
 	public Employee getEmployeeByID (UUID id) {
 		for (Employee emp : getEmployees()) {
-			if (emp.getId() == id) {
+			if (emp.getId().equals(id)) {
 				return emp;
 			}
 		}
