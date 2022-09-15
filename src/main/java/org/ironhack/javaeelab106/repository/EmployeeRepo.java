@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.ironhack.javaeelab106.domain.Employee;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,13 +22,28 @@ public class EmployeeRepo {
 		return this.employees.add(employee);
 	}
 
-	public void removeEmployee(UUID employeeID) {
+	public void removeEmployee(UUID employeeID) throws ConcurrentModificationException {
+		try {
+			for (Employee emp : getEmployees()) {
+				if (emp.getId().equals(employeeID)) {
+					if (getEmployees().remove(emp)) {
+						System.out.println("succesfully removed.");
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Success but there were some error");
+		}
+	}
+
+	public Employee getEmployeeByID (UUID id) {
 		for (Employee emp : getEmployees()) {
-			if (emp.getId() == employeeID) {
-				System.out.println("Employee " + emp.getName() + "removed.");
-				employees.remove(emp);
+			if (emp.getId() == id) {
+				return emp;
 			}
 		}
+		System.out.println("This employee is not present in the database.");
+		return null;
 	}
 
 	public void showEmployees () {

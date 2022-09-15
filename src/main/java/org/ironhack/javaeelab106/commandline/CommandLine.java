@@ -11,12 +11,37 @@ import java.util.UUID;
 
 @ShellComponent
 public class CommandLine implements ICommandLine {
+	/**
+	 * Provides commands to perform CRUD with employees and interns
+	 * repositories.
+	 *
+	 * @author Alex Dopico
+	 * @version 1.0.0
+	 * @since 2022-09-15
+	 */
 	private EmployeeRepo employees = new EmployeeRepo();
 	private InternRepo interns = new InternRepo();
 
 	public EmployeeRepo getEmployeeRepo() { return this.employees; }
 	public InternRepo getInternRepo() { return this.interns; }
 
+	@Override
+	public void getEmployeeById (UUID id) {
+		Employee emp = getEmployeeRepo().getEmployeeByID(id);
+		System.out.println(emp.toString());
+	}
+
+	@Override
+	public void getInternById (UUID id) {
+		Intern intern = getInternRepo().getInternByID(id);
+		System.out.println(intern.toString());
+	}
+
+	/**
+	 * Adds 5 employees and 5 interns to
+	 * employee and intern repos
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="add some dummy employees", key="reg-dummy")
 	public void addDummy () {
@@ -42,6 +67,16 @@ public class CommandLine implements ICommandLine {
 		getInternRepo().addIntern(intern5);
 	}
 
+
+
+	/**
+	 * create a new employee via user input
+	 * @param name: String
+	 * @param birthDate: String
+	 * @param email: String
+	 * @param address: String
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="specify values for each employee you want to create", key="reg-custom-emp")
 	public void addCustomEmp (String name, String birthDate, String email, String address) {
@@ -49,6 +84,15 @@ public class CommandLine implements ICommandLine {
 		getEmployeeRepo().addEmployee(customEmployee);
 	}
 
+	/**
+	 * creates a new intern via user input
+	 * @param name: String
+	 * @param birthDate: String
+	 * @param email: String
+	 * @param address: String
+	 * @param salary: double
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="specify values for each intern you want to create", key="reg-custom-intern")
 	public void addCustomIntern (String name, String birthDate, String email, String address, double salary) {
@@ -56,29 +100,58 @@ public class CommandLine implements ICommandLine {
 		getInternRepo().addIntern(customIntern);
 	}
 
+	/**
+	 * gets an intern through its id
+	 * and raises its salary
+	 * @param id: UUID
+	 * @param raise: double
+	 * @returns void
+	 */
 	@Override
-	public void raiseSalary (double raise) {
-
+	@ShellMethod(value="updates an intern salary.", key="raise")
+	public void raiseSalary (UUID id, double raise) {
+		Intern internToRaise = getInternRepo().getInternByID(id);
+		internToRaise.raiseSalary(raise);
 	}
 
+	/**
+	 * show all registries in employee repository
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="shows actual employees in the system.", key="show-emp")
 	public void showEmployees () {
 		getEmployeeRepo().showEmployees();
 	}
 
+	/**
+	 * shows all registries in intern repository
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="shows actual interns in the system.", key="show-interns")
 	public void showInterns () {
 		getInternRepo().showInterns();
 	}
 
+	/**
+	 * gets an employee through its id and
+	 * removes it from the repository
+	 * @param id: UUID
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="removes an employee from the system.", key="remove-emp")
 	public void removeEmp (UUID id) {
 		getEmployeeRepo().removeEmployee(id);
 	}
 
+	/**
+	 * gets an intern thorugh its id
+	 * and removes it from the repository
+	 * @param id: UUID
+	 * @returns void
+	 */
 	@Override
 	@ShellMethod(value="removes an intern from the system.", key="remove-intern")
 	public void removeIntern (UUID id) {
