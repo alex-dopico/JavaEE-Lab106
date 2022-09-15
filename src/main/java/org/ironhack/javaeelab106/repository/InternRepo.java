@@ -2,7 +2,6 @@ package org.ironhack.javaeelab106.repository;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.ironhack.javaeelab106.domain.Employee;
 import org.ironhack.javaeelab106.domain.Intern;
 
 import java.util.ArrayList;
@@ -13,13 +12,19 @@ import java.util.UUID;
 @Getter
 @Setter
 public class InternRepo {
+  /**
+   * List<Intern> is a repository for interns.
+	 */
 	private List<Intern> interns;
 
+	/**
+	 * List<Employee> is a repository from employees.
+	 */
 	public InternRepo() {
-		this.interns = new ArrayList<>();
-	}
+    this.interns = new ArrayList<>();
+  }
 
-	public boolean addIntern (Intern intern) {
+  public boolean addIntern(Intern intern) {
 		return this.interns.add(intern);
 	}
 
@@ -37,7 +42,7 @@ public class InternRepo {
 		}
 	}
 
-	public Intern getInternByID (UUID id) {
+	public Intern getInternByID(UUID id) {
 		for (Intern intern : getInterns()) {
 			if (intern.getId() == id) {
 				return intern;
@@ -47,7 +52,7 @@ public class InternRepo {
 		return null;
 	}
 
-	public void showInterns () {
+	public void showInterns() {
 		for (Intern intern : getInterns()) {
 			System.out.println(intern.toString());
 		}

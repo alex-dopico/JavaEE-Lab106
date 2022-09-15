@@ -32,15 +32,24 @@
 
 * Available custom commands:
 > reg-dummy -> creates 10 employees and saves the result in a file employees.txt
+
 > reg-custom-emp -> allows to register an employee by entering its details
+
 > reg-custom-intern -> allows to register a custom intern
+
 > show-emp -> shows a list of registered employees
+
 > show-intern -> shows a list of registered interns
+
 > remove-emp -> removes an employee from the repository
+
 > remove-intern -> removes an intern from the repository
+
 > raise -> raises an intern salary
 
 * Available default commands:
 > help: shows a list of available commands and a brief description
+
 > quit: exits the application
+
 > exit: quits the application
