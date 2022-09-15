@@ -1,8 +1,5 @@
 package org.ironhack.javaeelab106.commandline;
 
-import org.ironhack.javaeelab106.domain.Employee;
-import org.ironhack.javaeelab106.domain.Intern;
-
 import java.util.UUID;
 
 public interface ICommandLine {
